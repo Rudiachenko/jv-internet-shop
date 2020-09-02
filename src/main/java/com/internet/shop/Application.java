@@ -14,7 +14,7 @@ public class Application {
         productService.create(new Product("Samsung", 800));
         productService.create(new Product("Lenovo", 800));
         Product productForUpdateTest = new Product("Huawei", 600);
-        productForUpdateTest.setId(3);
+        productForUpdateTest.setId(3L);
 
         System.out.println("All products: ");
         productService.getAll().forEach(System.out::println);
