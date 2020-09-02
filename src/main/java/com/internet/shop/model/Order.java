@@ -3,11 +3,11 @@ package com.internet.shop.model;
 import java.util.List;
 
 public class Order {
-    private long id;
-    private long userId;
+    private Long id;
+    private Long userId;
     private List<Product> products;
 
-    public Order(List<Product> products, long userId) {
+    public Order(List<Product> products, Long userId) {
         this.products = products;
         this.userId = userId;
     }

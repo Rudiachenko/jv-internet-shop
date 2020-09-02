@@ -18,7 +18,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public Optional<Product> get(Long productId) {
         return Storage.products.stream()
-                .filter(x -> x.getId() == productId)
+                .filter(x -> x.getId().equals(productId))
                 .findFirst();
     }
 
@@ -31,7 +31,7 @@ public class ProductDaoImpl implements ProductDao {
     public Product update(Product product) {
         List<Product> products = Storage.products;
         for (int i = 0; i < products.size(); i++) {
-            if (product.getId() == products.get(i).getId()) {
+            if (product.getId().equals(products.get(i).getId())) {
                 return products.set(i, product);
             }
         }
@@ -40,6 +40,6 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public boolean delete(Long productId) {
-        return Storage.products.removeIf(product -> product.getId() == productId);
+        return Storage.products.removeIf(product -> product.getId().equals(productId));
     }
 }

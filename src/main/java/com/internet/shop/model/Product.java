@@ -3,7 +3,7 @@ package com.internet.shop.model;
 import java.math.BigDecimal;
 
 public class Product {
-    private long id;
+    private Long id;
     private String name;
     private BigDecimal price;
 
@@ -12,11 +12,11 @@ public class Product {
         this.price = BigDecimal.valueOf(price);
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
