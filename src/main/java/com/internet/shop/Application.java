@@ -9,12 +9,16 @@ public class Application {
 
     public static void main(String[] args) {
         ProductService productService = (ProductService) injector.getInstance(ProductService.class);
-        productService.create(new Product("Iphone", 1000));
-        productService.create(new Product("Xiaomi", 600));
-        productService.create(new Product("Samsung", 800));
-        productService.create(new Product("Lenovo", 800));
+        Product iphone = new Product("Iphone", 1000);
+        Product xiaomi = new Product("Xiaomi", 600);
+        Product samsung = new Product("Samsung", 800);
+        Product lenovo = new Product("Lenovo", 800);
+        productService.create(iphone);
+        productService.create(xiaomi);
+        productService.create(samsung);
+        productService.create(lenovo);
         Product productForUpdateTest = new Product("Huawei", 600);
-        productForUpdateTest.setId(3L);
+        productForUpdateTest.setId(lenovo.getId());
 
         System.out.println("All products: ");
         productService.getAll().forEach(System.out::println);
