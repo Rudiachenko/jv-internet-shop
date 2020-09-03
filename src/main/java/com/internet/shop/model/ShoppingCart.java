@@ -15,4 +15,12 @@ public class ShoppingCart {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
 }

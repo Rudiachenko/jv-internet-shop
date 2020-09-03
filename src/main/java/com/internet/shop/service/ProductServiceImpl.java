@@ -18,7 +18,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product get(Long id) {
-        return productDao.get(id).get();
+        if (productDao.get(id).isPresent()) {
+            return productDao.get(id).get();
+        } else {
+            throw new IllegalArgumentException("Product with id " + id + " not found");
+        }
     }
 
     @Override

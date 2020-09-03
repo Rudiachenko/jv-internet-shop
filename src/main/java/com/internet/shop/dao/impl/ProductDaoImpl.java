@@ -35,11 +35,12 @@ public class ProductDaoImpl implements ProductDao {
                 return products.set(i, product);
             }
         }
-        return product;
+        throw new IllegalArgumentException("Product with id " + product.getId() + " not found");
     }
 
     @Override
     public boolean delete(Long productId) {
-        return Storage.products.removeIf(product -> product.getId().equals(productId));
+        return Storage.products
+                .removeIf(product -> product.getId().equals(productId));
     }
 }

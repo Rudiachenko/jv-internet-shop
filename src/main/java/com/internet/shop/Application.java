@@ -6,6 +6,7 @@ import com.internet.shop.service.ProductService;
 
 public class Application {
     private static Injector injector = Injector.getInstance("com.internet.shop");
+    private static final Long INDEX = 1L;
 
     public static void main(String[] args) {
         ProductService productService = (ProductService) injector.getInstance(ProductService.class);
@@ -24,10 +25,10 @@ public class Application {
         productService.getAll().forEach(System.out::println);
 
         System.out.println("\nProduct by index 1:");
-        System.out.println(productService.get(1L));
+        System.out.println(productService.get(INDEX));
 
         System.out.println("\nAll products after deletion by index 1: ");
-        productService.delete(1L);
+        productService.delete(INDEX);
         System.out.println(productService.getAll());
 
         System.out.println("\nAll products after update: ");
