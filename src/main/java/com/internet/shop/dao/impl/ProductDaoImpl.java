@@ -6,6 +6,7 @@ import com.internet.shop.lib.Dao;
 import com.internet.shop.model.Product;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 @Dao
 public class ProductDaoImpl implements ProductDao {
@@ -29,13 +30,10 @@ public class ProductDaoImpl implements ProductDao {
 
     @Override
     public Product update(Product product) {
-        List<Product> products = Storage.products;
-        for (int i = 0; i < products.size(); i++) {
-            if (product.getId().equals(products.get(i).getId())) {
-                return products.set(i, product);
-            }
-        }
-        throw new IllegalArgumentException("Product with id " + product.getId() + " not found");
+        IntStream.range(0, Storage.products.size())
+                .filter(i -> Storage.products.get(i).getId().equals(product.getId()))
+                .forEach(i -> Storage.products.set(i, product));
+        return product;
     }
 
     @Override
