@@ -5,6 +5,7 @@ import com.internet.shop.lib.Inject;
 import com.internet.shop.lib.Service;
 import com.internet.shop.model.Product;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -18,11 +19,8 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product get(Long id) {
-        if (productDao.get(id).isPresent()) {
-            return productDao.get(id).get();
-        } else {
-            throw new IllegalArgumentException("Product with id " + id + " not found");
-        }
+        return productDao.get(id).orElseThrow(() ->
+                new NoSuchElementException("Product with id " + id + " not found"));
     }
 
     @Override
