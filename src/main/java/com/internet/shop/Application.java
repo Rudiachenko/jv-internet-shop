@@ -71,9 +71,10 @@ public class Application {
         System.out.println("\nGet shopping cart by user id");
         System.out.println(shoppingCartService.getByUserId(userBob.getId()));
 
-        Order order = new Order(INDEX);
         orderService.completeOrder(cart);
         System.out.println("\nGet order of user Bob" + "\n"
                 + orderService.getUserOrders(userBob.getId()));
+        orderService.delete(INDEX);
+        System.out.println(orderService.getAll());
     }
 }
