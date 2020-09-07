@@ -22,7 +22,6 @@ public class Application {
 
     public static void main(String[] args) {
         productService = (ProductService) injector.getInstance(ProductService.class);
-
         shoppingCartService = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
         orderService = (OrderService) injector.getInstance(OrderService.class);
         userService = (UserService) injector.getInstance(UserService.class);
