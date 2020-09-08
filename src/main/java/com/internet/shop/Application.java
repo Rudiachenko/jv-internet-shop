@@ -2,7 +2,6 @@ package com.internet.shop;
 
 import com.internet.shop.db.Storage;
 import com.internet.shop.lib.Injector;
-import com.internet.shop.model.Order;
 import com.internet.shop.model.Product;
 import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.model.User;
@@ -74,6 +73,8 @@ public class Application {
         orderService.completeOrder(cart);
         System.out.println("\nGet order of user Bob" + "\n"
                 + orderService.getUserOrders(userBob.getId()));
+        System.out.println("\nGet order by id " + "\n"
+                + orderService.get(INDEX));
         orderService.delete(INDEX);
         System.out.println(orderService.getAll());
     }
