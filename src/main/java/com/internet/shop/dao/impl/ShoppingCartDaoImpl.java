@@ -5,7 +5,6 @@ import com.internet.shop.db.Storage;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.model.ShoppingCart;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.Optional;
 import java.util.stream.IntStream;
 
@@ -30,13 +29,10 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     }
 
     @Override
-    public ShoppingCart getByUserId(Long userId) {
+    public Optional<ShoppingCart> getByUserId(Long userId) {
         return Storage.shoppingCarts.stream()
                 .filter(s -> s.getUserId().equals(userId))
-                .findFirst()
-                .orElseThrow(() ->
-                        new NoSuchElementException("ShoppingCart of user id "
-                                + userId + " not found"));
+                .findFirst();
     }
 
     @Override

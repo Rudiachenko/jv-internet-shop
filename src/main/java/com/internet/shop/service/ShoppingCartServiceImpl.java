@@ -5,6 +5,7 @@ import com.internet.shop.lib.Inject;
 import com.internet.shop.lib.Service;
 import com.internet.shop.model.Product;
 import com.internet.shop.model.ShoppingCart;
+import java.util.NoSuchElementException;
 
 @Service
 public class ShoppingCartServiceImpl implements ShoppingCartService {
@@ -37,7 +38,9 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
 
     @Override
     public ShoppingCart getByUserId(Long userId) {
-        return shoppingCartDao.getByUserId(userId);
+        return shoppingCartDao.getByUserId(userId).orElseThrow(() ->
+                new NoSuchElementException("ShoppingCart of user id "
+                        + userId + " not found"));
     }
 
     @Override
