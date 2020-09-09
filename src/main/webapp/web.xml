@@ -24,7 +24,7 @@
 
     <servlet>
         <servlet-name>All users</servlet-name>
-        <servlet-class>com.internet.shop.controllers.UsersController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.user.UsersController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>All users</servlet-name>
@@ -33,7 +33,7 @@
 
     <servlet>
         <servlet-name>Registration</servlet-name>
-        <servlet-class>com.internet.shop.controllers.RegistrationController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.user.RegistrationController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Registration</servlet-name>
@@ -42,7 +42,7 @@
 
     <servlet>
         <servlet-name>delete user</servlet-name>
-        <servlet-class>com.internet.shop.controllers.DeleteUsersController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.user.DeleteUsersController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>delete user</servlet-name>
@@ -51,7 +51,7 @@
 
     <servlet>
         <servlet-name>add products</servlet-name>
-        <servlet-class>com.internet.shop.controllers.AddProductController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.product.AddProductController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>add products</servlet-name>
@@ -60,7 +60,7 @@
 
     <servlet>
         <servlet-name>All products</servlet-name>
-        <servlet-class>com.internet.shop.controllers.ProductController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.product.ProductController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>All products</servlet-name>
@@ -69,7 +69,7 @@
 
     <servlet>
         <servlet-name>Add to shopping cart</servlet-name>
-        <servlet-class>com.internet.shop.controllers.AddProductToShoppingCartController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.cart.AddProductToShoppingCartController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Add to shopping cart</servlet-name>
@@ -78,7 +78,7 @@
 
     <servlet>
         <servlet-name>All products in shopping cart</servlet-name>
-        <servlet-class>com.internet.shop.controllers.ShoppingCartController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.cart.ShoppingCartController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>All products in shopping cart</servlet-name>
@@ -87,7 +87,7 @@
 
     <servlet>
         <servlet-name>Delete product from shopping cart</servlet-name>
-        <servlet-class>com.internet.shop.controllers.DeleteProductFromShoppingCartController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.cart.DeleteProductFromShoppingCartController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Delete product from shopping cart</servlet-name>
