@@ -5,7 +5,7 @@
     <title>All users</title>
 </head>
 <body>
-<h1>All users page</h1>
+<h1>All users</h1>
 
 <table border="1">
     <tr>

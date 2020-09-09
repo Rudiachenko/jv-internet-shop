@@ -1,6 +1,5 @@
 package com.internet.shop.controllers;
 
-import com.internet.shop.dao.ShoppingCartDao;
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Product;
 import com.internet.shop.service.ProductService;
