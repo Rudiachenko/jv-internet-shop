@@ -19,7 +19,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product get(Long id) {
-        return productDao.get(id).orElseThrow(() ->
+        return productDao.getById(id).orElseThrow(() ->
                 new NoSuchElementException("Product with id " + id + " not found"));
     }
 
