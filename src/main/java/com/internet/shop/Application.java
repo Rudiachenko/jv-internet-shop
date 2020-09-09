@@ -47,12 +47,12 @@ public class Application {
         productService.update(productForUpdateTest);
         System.out.println(productService.getAll());
 
-        User userBob = new User("Bob", "Bobby", "qwerty12456");
-        User userTom = new User("Tom", "Tommy", "tyuio12345");
+        User userBob = new User("Bob");
+        User userTom = new User("Tom");
         userService.create(userBob);
         userService.create(userTom);
         System.out.println("\nGet user by id" + "\n" + userService.get(userBob.getId()));
-        User userForUpdate = new User("Alice", "Alice", "asdfg12345");
+        User userForUpdate = new User("Alice");
         userForUpdate.setId(INDEX_TWO);
         System.out.println("\nUsers before update" + "\n" + userService.getAll());
         userService.update(userForUpdate);

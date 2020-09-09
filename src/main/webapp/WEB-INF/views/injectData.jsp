@@ -4,7 +4,8 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Hello world!</h1>
-<a href="${pageContext.request.contextPath}/injectData">Inject test data into DB</a>
+<h1>Your mock data was added to DB</h1>
+<a href="${pageContext.request.contextPath}/">Go to main page</a>
 </body>
 </html>
+
