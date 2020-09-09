@@ -17,8 +17,6 @@ public class AddProductToShoppingCartController extends HttpServlet {
     private static final Injector injector = Injector.getInstance("com.internet.shop");
     private final ShoppingCartService shoppingCartService =
             (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
-    private final ShoppingCartDao shoppingCartDao =
-            (ShoppingCartDao) injector.getInstance(ShoppingCartDao.class);
     private final ProductService productService =
             (ProductService) injector.getInstance(ProductService.class);
 
