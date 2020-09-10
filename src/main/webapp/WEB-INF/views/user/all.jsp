@@ -22,9 +22,10 @@
                 <c:out value="${user.login}"/>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/users/delete?id=${user.id}">
+                <form action="${pageContext.request.contextPath}/users/delete" method="get">
+                    <input type="hidden" name="id" value="${user.id}">
                     <button type="submit">Delete</button>
-                </a>
+                </form>
             </td>
         </tr>
     </c:forEach>

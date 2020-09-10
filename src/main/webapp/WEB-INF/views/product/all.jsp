@@ -26,12 +26,16 @@
                 <c:out value="${product.price}"/>
             </td>
             <td>
-                <a href="${pageContext.request.contextPath}/shopping-carts/products/add?id=${product.id}">
+                <form action="${pageContext.request.contextPath}/shopping-carts/products/add" method="get">
+                    <input type="hidden" name="id" value="${product.id}">
                     <button type="submit">Add to shopping cart</button>
-                </a>
+                </form>
             </td>
         </tr>
     </c:forEach>
 </table>
+<form action="${pageContext.request.contextPath}/shopping-carts/products/all" target="_self">
+    <button>Go to shopping cart</button>
+</form>
 </body>
 </html>
