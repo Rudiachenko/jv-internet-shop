@@ -6,10 +6,8 @@ public class User {
     private String login;
     private String password;
 
-    public User(String name, String login, String password) {
-        this.name = name;
+    public User(String login) {
         this.login = login;
-        this.password = password;
     }
 
     public void setId(Long id) {
@@ -48,7 +46,6 @@ public class User {
     public String toString() {
         return "User{"
                 + "id=" + id
-                + ", name='" + name
                 + '\''
                 + ", login='" + login
                 + '\''
