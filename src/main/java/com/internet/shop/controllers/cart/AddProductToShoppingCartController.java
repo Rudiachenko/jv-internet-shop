@@ -2,6 +2,7 @@ package com.internet.shop.controllers.cart;
 
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Product;
+import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.service.ProductService;
 import com.internet.shop.service.ShoppingCartService;
 import java.io.IOException;
@@ -24,15 +25,15 @@ public class AddProductToShoppingCartController extends HttpServlet {
             throws ServletException, IOException {
         Long id = Long.parseLong(req.getParameter("id"));
         Product product = productService.get(id);
-        List<Product> products = shoppingCartService.getByUserId(USER_ID).getProducts();
+        ShoppingCart cart = shoppingCartService.getByUserId(USER_ID);
+        List<Product> products = cart.getProducts();
         if (products.contains(product)) {
             List<Product> allProducts = productService.getAll();
             req.setAttribute("products", allProducts);
-            req.setAttribute("message", "This item is already exist in shopping cart.");
+            req.setAttribute("message", "This item is already exist in your shopping cart.");
             req.getRequestDispatcher("/WEB-INF/views/product/all.jsp").forward(req, resp);
         } else {
-            shoppingCartService.addProduct(shoppingCartService.getByUserId(USER_ID), product);
-            System.out.println(shoppingCartService.getByUserId(USER_ID));
+            shoppingCartService.addProduct(cart, product);
             resp.sendRedirect(req.getContextPath() + "/products/all");
         }
     }
