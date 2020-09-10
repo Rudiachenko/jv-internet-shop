@@ -14,12 +14,12 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>injectData</servlet-name>
+        <servlet-name>inject data</servlet-name>
         <servlet-class>com.internet.shop.controllers.InjectDataController</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>injectData</servlet-name>
-        <url-pattern>/injectData</url-pattern>
+        <servlet-name>inject data</servlet-name>
+        <url-pattern>/inject/data</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -83,14 +83,5 @@
     <servlet-mapping>
         <servlet-name>All products in shopping cart</servlet-name>
         <url-pattern>/shopping-carts/products/all</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>Delete product from shopping cart</servlet-name>
-        <servlet-class>com.internet.shop.controllers.cart.DeleteProductFromShoppingCartController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>Delete product from shopping cart</servlet-name>
-        <url-pattern>/shopping-carts/products/delete</url-pattern>
     </servlet-mapping>
 </web-app>

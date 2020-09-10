@@ -29,10 +29,7 @@ public class RegistrationController extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("psw");
         String passwordRepeat = req.getParameter("psw-rpt");
-        if (password.length() < 6) {
-            req.setAttribute("message", "Your password length should be at least 6 characters.");
-            req.getRequestDispatcher("/WEB-INF/views/user/registration.jsp").forward(req, resp);
-        }
+        checkLengthPassword(req, resp, password);
         if (password.equals(passwordRepeat)) {
             User newUser = new User(login);
             newUser.setPassword(password);
@@ -42,6 +39,15 @@ public class RegistrationController extends HttpServlet {
             resp.sendRedirect(req.getContextPath() + "/users/all");
         } else {
             req.setAttribute("message", "Your password and repeat password aren't the same.");
+            req.getRequestDispatcher("/WEB-INF/views/user/registration.jsp").forward(req, resp);
+        }
+    }
+
+    private void checkLengthPassword(HttpServletRequest req,
+                                     HttpServletResponse resp, String password)
+            throws ServletException, IOException {
+        if (password.length() < 6) {
+            req.setAttribute("message", "Your password length should be at least 6 characters.");
             req.getRequestDispatcher("/WEB-INF/views/user/registration.jsp").forward(req, resp);
         }
     }

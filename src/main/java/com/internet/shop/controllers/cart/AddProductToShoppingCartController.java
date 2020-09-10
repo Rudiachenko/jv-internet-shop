@@ -6,8 +6,6 @@ import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.service.ProductService;
 import com.internet.shop.service.ShoppingCartService;
 import java.io.IOException;
-import java.util.List;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,19 +20,11 @@ public class AddProductToShoppingCartController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
+            throws IOException {
         Long id = Long.parseLong(req.getParameter("id"));
         Product product = productService.get(id);
         ShoppingCart cart = shoppingCartService.getByUserId(USER_ID);
-        List<Product> products = cart.getProducts();
-        if (products.contains(product)) {
-            List<Product> allProducts = productService.getAll();
-            req.setAttribute("products", allProducts);
-            req.setAttribute("message", "This item is already exist in your shopping cart.");
-            req.getRequestDispatcher("/WEB-INF/views/product/all.jsp").forward(req, resp);
-        } else {
-            shoppingCartService.addProduct(cart, product);
-            resp.sendRedirect(req.getContextPath() + "/products/all");
-        }
+        shoppingCartService.addProduct(cart, product);
+        resp.sendRedirect(req.getContextPath() + "/products/all");
     }
 }
