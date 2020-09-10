@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>All users</title>
+    <title>All users page</title>
 </head>
 <body>
 <h1>All users</h1>

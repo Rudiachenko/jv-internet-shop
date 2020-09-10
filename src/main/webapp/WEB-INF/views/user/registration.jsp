@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Registration</title>
+    <title>Registration page</title>
 </head>
 <body>
 <h1>Hello! Please provide your user details</h1>
