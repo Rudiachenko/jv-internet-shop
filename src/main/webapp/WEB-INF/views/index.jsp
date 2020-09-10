@@ -4,7 +4,7 @@
     <title>Main page</title>
 </head>
 <body>
-<h1>Hello to casual cat shop!</h1>
+<h1>Welcome to casual cat shop!</h1>
 <form action="${pageContext.request.contextPath}/inject/data" target="_self">
     <button>Inject test data into DB</button>
 </form>
