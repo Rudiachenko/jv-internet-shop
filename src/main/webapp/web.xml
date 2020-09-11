@@ -37,7 +37,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>Registration</servlet-name>
-        <url-pattern>/users/registration</url-pattern>
+        <url-pattern>/registration</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -104,7 +104,7 @@
 
     <servlet>
         <servlet-name>User order</servlet-name>
-        <servlet-class>com.internet.shop.controllers.order.UserOrderController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.order.GetUserOrderController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>User order</servlet-name>
@@ -113,7 +113,7 @@
 
     <servlet>
         <servlet-name>User-admin order</servlet-name>
-        <servlet-class>com.internet.shop.controllers.order.ManageOrderController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.order.ManageOrdersController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>User-admin order</servlet-name>
@@ -131,7 +131,7 @@
 
     <servlet>
         <servlet-name>Manage product</servlet-name>
-        <servlet-class>com.internet.shop.controllers.product.ManageProductController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.product.ManageProductsController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Manage product</servlet-name>
