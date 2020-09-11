@@ -1,6 +1,7 @@
 package com.internet.shop.controllers.order;
 
 import com.internet.shop.lib.Injector;
+import com.internet.shop.model.Order;
 import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.service.OrderService;
 import com.internet.shop.service.ShoppingCartService;
@@ -22,6 +23,6 @@ public class CompleteOrderController extends HttpServlet {
             throws IOException {
         ShoppingCart cart = shoppingCartService.getByUserId(USER_ID);
         orderService.completeOrder(cart);
-        resp.sendRedirect(req.getContextPath() + "/orders/user/order");
+        resp.sendRedirect(req.getContextPath() + "/user/orders");
     }
 }

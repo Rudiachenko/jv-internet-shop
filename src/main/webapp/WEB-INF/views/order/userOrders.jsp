@@ -25,7 +25,7 @@
     </c:forEach>
 </table>
 <br>
-<form action="${pageContext.request.contextPath}/orders/admin/order" target="_self">
+<form action="${pageContext.request.contextPath}/admin/orders" target="_self">
     <button>Go to manage orders (only for admin)</button>
 </form>
 </body>

@@ -33,7 +33,7 @@
         </tr>
     </c:forEach>
 </table>
-<form action="${pageContext.request.contextPath}/shopping-carts/products/all" target="_self">
+<form action="${pageContext.request.contextPath}/shopping-carts/products" target="_self">
     <button>Go to shopping cart</button>
 </form>
 </body>

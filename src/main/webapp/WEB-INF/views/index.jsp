@@ -11,14 +11,14 @@
 <h2>User menu</h2>
 <a href="${pageContext.request.contextPath}users/registration">Sign up</a><br>
 <a href="${pageContext.request.contextPath}/products/all">All products</a><br>
-<a href="${pageContext.request.contextPath}/shopping-carts/products/all">Shopping cart</a><br>
-<a href="${pageContext.request.contextPath}/orders/user/order">Orders</a><br>
+<a href="${pageContext.request.contextPath}/shopping-carts/products">Shopping cart</a><br>
+<a href="${pageContext.request.contextPath}/user/orders">Orders</a><br>
 
 <h3>Admin menu</h3>
 <a href="${pageContext.request.contextPath}/users/all">All users</a><br>
 <a href="${pageContext.request.contextPath}/products/add">Create a new product</a><br>
-<a href="${pageContext.request.contextPath}/products/admin/all">Manage products</a><br>
-<a href="${pageContext.request.contextPath}/orders/admin/order">Manage orders</a><br>
+<a href="${pageContext.request.contextPath}/admin/products">Manage products</a><br>
+<a href="${pageContext.request.contextPath}/admin/orders">Manage orders</a><br>
 
 </body>
 </html>
