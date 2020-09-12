@@ -104,7 +104,7 @@
 
     <servlet>
         <servlet-name>User order</servlet-name>
-        <servlet-class>com.internet.shop.controllers.order.GetUserOrderController</servlet-class>
+        <servlet-class>com.internet.shop.controllers.order.GetUserOrdersController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>User order</servlet-name>
