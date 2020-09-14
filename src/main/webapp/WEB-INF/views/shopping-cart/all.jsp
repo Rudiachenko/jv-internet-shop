@@ -11,6 +11,7 @@
         <th>ID</th>
         <th>Name</th>
         <th>Price</th>
+        <th>Delete</th>
     </tr>
     <c:forEach var="product" items="${products}">
         <tr>
@@ -23,8 +24,20 @@
             <td>
                 <c:out value="${product.price}"/>
             </td>
+            <td>
+                <form action="${pageContext.request.contextPath}/shopping-carts/products/delete" method="get">
+                    <input type="hidden" name="id" value="${product.id}">
+                    <button type="submit">Delete from shopping cart</button>
+                </form>
+            </td>
         </tr>
     </c:forEach>
 </table>
+<form action="${pageContext.request.contextPath}/products/all" target="_self">
+    <button>Go to all products list</button>
+</form>
+<form action="${pageContext.request.contextPath}/orders/complete-order" target="_self">
+    <button>Checkout</button>
+</form>
 </body>
 </html>

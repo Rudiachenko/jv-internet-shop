@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Add product page</title>
 </head>
 <body>
 <form method="post" action="${pageContext.request.contextPath}/products/add">
