@@ -1,11 +1,15 @@
-package com.internet.shop.service;
+package com.internet.shop.service.impl;
 
 import com.internet.shop.dao.UserDao;
 import com.internet.shop.lib.Inject;
 import com.internet.shop.lib.Service;
 import com.internet.shop.model.User;
+import com.internet.shop.service.UserService;
+
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -39,8 +43,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByLogin(String login) {
-        return userDao.findByLogin(login).orElseThrow(() ->
-                        new NoSuchElementException("User with login " + login + " not found"));
+    public Optional<User> findByLogin(String login) {
+        return userDao.findByLogin(login);
     }
 }

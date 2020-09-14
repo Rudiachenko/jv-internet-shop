@@ -2,6 +2,7 @@ package com.internet.shop.service;
 
 import com.internet.shop.model.User;
 import java.util.List;
+import java.util.Optional;
 
 public interface UserService {
     User create(User user);
@@ -14,5 +15,5 @@ public interface UserService {
 
     boolean delete(Long id);
 
-    User findByLogin(String login);
+    Optional<User> findByLogin(String login);
 }
