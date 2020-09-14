@@ -37,4 +37,10 @@ public class UserServiceImpl implements UserService {
     public boolean delete(Long id) {
         return userDao.delete(id);
     }
+
+    @Override
+    public User findByLogin(String login) {
+        return userDao.findByLogin(login).orElseThrow(() ->
+                        new NoSuchElementException("User with login " + login + " not found"));
+    }
 }

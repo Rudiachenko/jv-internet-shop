@@ -13,4 +13,6 @@ public interface UserService {
     User update(User user);
 
     boolean delete(Long id);
+
+    User findByLogin(String login);
 }

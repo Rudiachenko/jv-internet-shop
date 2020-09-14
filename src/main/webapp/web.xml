@@ -147,4 +147,13 @@
         <url-pattern>/products/admin/delete</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>com.internet.shop.controllers.user.LoginController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/login</url-pattern>
+    </servlet-mapping>
+
 </web-app>
