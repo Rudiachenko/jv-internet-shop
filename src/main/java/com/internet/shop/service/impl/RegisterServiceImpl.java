@@ -11,10 +11,12 @@ public class RegisterServiceImpl implements RegisterService {
     public User register(String login, String password, String repeatPassword)
             throws IncorrectRegistrationDataException {
         if (password.length() < 6) {
-            throw new IncorrectRegistrationDataException("Your password length should be at least 6 characters.");
+            throw new IncorrectRegistrationDataException("Your password length should "
+                    + "be at least 6 characters.");
         }
-        if (!password.equals(repeatPassword)){
-            throw new IncorrectRegistrationDataException("Your password and repeat password aren't the same.");
+        if (!password.equals(repeatPassword)) {
+            throw new IncorrectRegistrationDataException("Your password and repeat "
+                    + "password aren't the same.");
         }
         User newUser = new User(login);
         newUser.setPassword(password);
