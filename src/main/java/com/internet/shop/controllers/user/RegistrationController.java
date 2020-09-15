@@ -1,8 +1,10 @@
 package com.internet.shop.controllers.user;
 
+import com.internet.shop.exceptions.IncorrectRegistrationDataException;
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.model.User;
+import com.internet.shop.service.RegisterService;
 import com.internet.shop.service.ShoppingCartService;
 import com.internet.shop.service.UserService;
 import java.io.IOException;
@@ -16,6 +18,8 @@ public class RegistrationController extends HttpServlet {
     private final UserService userService = (UserService) injector.getInstance(UserService.class);
     private final ShoppingCartService shoppingCartService =
             (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+    private final RegisterService registerService
+            = (RegisterService) injector.getInstance(RegisterService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -29,26 +33,15 @@ public class RegistrationController extends HttpServlet {
         String login = req.getParameter("login");
         String password = req.getParameter("psw");
         String passwordRepeat = req.getParameter("psw-rpt");
-        checkLengthPassword(req, resp, password);
-        if (password.equals(passwordRepeat)) {
-            User newUser = new User(login);
-            newUser.setPassword(password);
+        try {
+            User newUser = registerService.register(login, password, passwordRepeat);
             userService.create(newUser);
             ShoppingCart cart = new ShoppingCart(newUser.getId());
             shoppingCartService.create(cart);
-            resp.sendRedirect(req.getContextPath() + "/users/all");
-        } else {
-            req.setAttribute("message", "Your password and repeat password aren't the same.");
+        } catch (IncorrectRegistrationDataException e) {
+            req.setAttribute("message", e.getMessage());
             req.getRequestDispatcher("/WEB-INF/views/user/registration.jsp").forward(req, resp);
         }
-    }
-
-    private void checkLengthPassword(HttpServletRequest req,
-                                     HttpServletResponse resp, String password)
-            throws ServletException, IOException {
-        if (password.length() < 6) {
-            req.setAttribute("message", "Your password length should be at least 6 characters.");
-            req.getRequestDispatcher("/WEB-INF/views/user/registration.jsp").forward(req, resp);
-        }
+        resp.sendRedirect(req.getContextPath() + "/login");
     }
 }

@@ -10,7 +10,7 @@
 <table border="1">
     <tr>
         <th>ID</th>
-        <th>Name</th>
+        <th>Login</th>
         <th>Delete</th>
     </tr>
     <c:forEach var="user" items="${users}">
