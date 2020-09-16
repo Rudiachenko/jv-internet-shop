@@ -3,12 +3,14 @@
 <html>
 <head>
     <title>User orders page</title>
+    <jsp:include page="/WEB-INF/views/header.jsp"/>
 </head>
 <body>
 <h1>User orders</h1>
 <c:forEach var="order" items="${orders}">
 <table width="300" border="1">
     <tr>
+        <th>User id</th>
         <th>Product id</th>
         <th>Product name</th>
         <th>Price</th>
@@ -17,6 +19,7 @@
     <strong>Order № ${order.id}</strong>
     <c:forEach var="product" items="${order.products}">
         <tr>
+            <td><c:out value="${order.userId}"/></td>
             <td><c:out value="${product.id}"/></td>
             <td><c:out value="${product.name}"/></td>
             <td><c:out value="${product.price}"/></td>

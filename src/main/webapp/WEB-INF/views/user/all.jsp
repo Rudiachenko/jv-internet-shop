@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>All users page</title>
+    <jsp:include page="/WEB-INF/views/header.jsp"/>
 </head>
 <body>
 <h1>All users</h1>
