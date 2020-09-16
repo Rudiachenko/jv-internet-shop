@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Delete products page</title>
+    <jsp:include page="/WEB-INF/views/header.jsp"/>
 </head>
 <body>
 <h1>All products</h1>

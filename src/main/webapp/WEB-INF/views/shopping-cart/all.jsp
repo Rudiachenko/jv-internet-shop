@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>All products in shopping cart page</title>
+    <jsp:include page="/WEB-INF/views/header.jsp"/>
 </head>
 <body>
 <h1>All products in shopping cart</h1>

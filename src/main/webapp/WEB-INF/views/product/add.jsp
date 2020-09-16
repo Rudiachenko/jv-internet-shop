@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>Add product page</title>
+    <jsp:include page="/WEB-INF/views/header.jsp"/>
 </head>
 <body>
 <form method="post" action="${pageContext.request.contextPath}/products/add">
