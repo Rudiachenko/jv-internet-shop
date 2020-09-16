@@ -37,8 +37,7 @@ public class RegistrationController extends HttpServlet {
         String passwordRepeat = req.getParameter("psw-rpt");
         try {
             User newUser = registerService.register(login, password, passwordRepeat);
-            Role role = new Role(Role.RoleName.USER);
-            newUser.setRoles(Set.of(role));
+            newUser.setRoles(Set.of(Role.of("USER")));
             userService.create(newUser);
             ShoppingCart cart = new ShoppingCart(newUser.getId());
             shoppingCartService.create(cart);

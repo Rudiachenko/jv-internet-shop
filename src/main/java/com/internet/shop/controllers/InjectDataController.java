@@ -3,7 +3,6 @@ package com.internet.shop.controllers;
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Product;
 import com.internet.shop.model.Role;
-import com.internet.shop.model.ShoppingCart;
 import com.internet.shop.model.User;
 import com.internet.shop.service.ProductService;
 import com.internet.shop.service.ShoppingCartService;
@@ -27,8 +26,7 @@ public class InjectDataController extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         User admin = new User("admin", "admin");
-        Role role = new Role(Role.RoleName.ADMIN);
-        admin.setRoles(Set.of(role));
+        admin.setRoles(Set.of(Role.of("ADMIN")));
         userService.create(admin);
 
         Product iphone = new Product("Iphone", 1000);
@@ -39,8 +37,6 @@ public class InjectDataController extends HttpServlet {
         productService.create(xiaomi);
         productService.create(samsung);
         productService.create(lenovo);
-        ShoppingCart bobCart = new ShoppingCart(admin.getId());
-        shoppingCartService.create(bobCart);
         req.getRequestDispatcher("/WEB-INF/views/injectData.jsp").forward(req, resp);
     }
 }
