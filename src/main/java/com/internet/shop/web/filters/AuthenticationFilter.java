@@ -1,6 +1,7 @@
 package com.internet.shop.web.filters;
 
 import java.io.IOException;
+import java.util.Set;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -12,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 public class AuthenticationFilter implements Filter {
     private static final String USER_ID = "userId";
+    private Set<String> availableUrls;
 
     @Override
     public void init(FilterConfig filterConfig) {
+        availableUrls = Set.of("/login", "/registration", "/products/all");
     }
 
     @Override
@@ -23,7 +26,7 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse resp = (HttpServletResponse) response;
         String url = req.getServletPath();
-        if (url.equals("/login") || url.equals("/registration")) {
+        if (availableUrls.contains(url)) {
             chain.doFilter(req, resp);
             return;
         }

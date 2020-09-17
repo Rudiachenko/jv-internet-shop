@@ -2,12 +2,13 @@ package com.internet.shop.controllers;
 
 import com.internet.shop.lib.Injector;
 import com.internet.shop.model.Product;
-import com.internet.shop.model.ShoppingCart;
+import com.internet.shop.model.Role;
 import com.internet.shop.model.User;
 import com.internet.shop.service.ProductService;
 import com.internet.shop.service.ShoppingCartService;
 import com.internet.shop.service.UserService;
 import java.io.IOException;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -24,12 +25,10 @@ public class InjectDataController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        User userBob = new User("Bob");
-        User userTom = new User("Tom");
-        userBob.setPassword("12345");
-        userTom.setPassword("12345");
-        userService.create(userBob);
-        userService.create(userTom);
+        User admin = new User("admin", "admin");
+        admin.setRoles(Set.of(Role.of("ADMIN")));
+        userService.create(admin);
+
         Product iphone = new Product("Iphone", 1000);
         Product xiaomi = new Product("Xiaomi", 600);
         Product samsung = new Product("Samsung", 800);
@@ -38,10 +37,6 @@ public class InjectDataController extends HttpServlet {
         productService.create(xiaomi);
         productService.create(samsung);
         productService.create(lenovo);
-        ShoppingCart bobCart = new ShoppingCart(userBob.getId());
-        ShoppingCart tomCart = new ShoppingCart(userTom.getId());
-        shoppingCartService.create(bobCart);
-        shoppingCartService.create(tomCart);
         req.getRequestDispatcher("/WEB-INF/views/injectData.jsp").forward(req, resp);
     }
 }

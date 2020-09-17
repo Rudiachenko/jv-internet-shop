@@ -18,8 +18,6 @@ public class RegisterServiceImpl implements RegisterService {
             throw new IncorrectRegistrationDataException("Your password and repeat "
                     + "password aren't the same.");
         }
-        User newUser = new User(login);
-        newUser.setPassword(password);
-        return newUser;
+        return new User(login, password);
     }
 }

@@ -10,6 +10,8 @@
 </form>
 <h2>User menu</h2>
 <a href="${pageContext.request.contextPath}/registration">Sign up</a><br>
+<a href="${pageContext.request.contextPath}/login">login</a><br>
+<a href="${pageContext.request.contextPath}/logout">logout</a><br>
 <a href="${pageContext.request.contextPath}/products/all">All products</a><br>
 <a href="${pageContext.request.contextPath}/shopping-carts/products">Shopping cart</a><br>
 <a href="${pageContext.request.contextPath}/user/orders">Orders</a><br>
