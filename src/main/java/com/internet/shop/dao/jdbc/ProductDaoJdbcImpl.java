@@ -5,6 +5,7 @@ import com.internet.shop.exceptions.DataProcessingException;
 import com.internet.shop.lib.Dao;
 import com.internet.shop.model.Product;
 import com.internet.shop.util.ConnectionUtil;
+
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -31,11 +32,11 @@ public class ProductDaoJdbcImpl implements ProductDao {
                 long productId = generatedKeys.getLong(1);
                 item.setId(productId);
             }
+            return item;
         } catch (SQLException e) {
             throw new DataProcessingException("It is impossible to create a product: "
                     + item, e);
         }
-        return item;
     }
 
     @Override
@@ -47,9 +48,8 @@ public class ProductDaoJdbcImpl implements ProductDao {
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             resultSet.next();
-            Product product = createProduct(resultSet);
+            Product product = createProductFromResultSet(resultSet);
             return Optional.of(product);
-
         } catch (SQLException e) {
             throw new DataProcessingException("Get product with id "
                     + id + " is failed", e);
@@ -64,13 +64,13 @@ public class ProductDaoJdbcImpl implements ProductDao {
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                Product product = createProduct(resultSet);
+                Product product = createProductFromResultSet(resultSet);
                 productsList.add(product);
             }
+            return productsList;
         } catch (SQLException e) {
             throw new DataProcessingException("Get products is failed", e);
         }
-        return productsList;
     }
 
     @Override
@@ -107,7 +107,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
         }
     }
 
-    private Product createProduct(ResultSet resultSet) throws SQLException {
+    private Product createProductFromResultSet(ResultSet resultSet) throws SQLException {
         long productId = resultSet.getLong("product_id");
         String name = resultSet.getString("name");
         long price = resultSet.getLong("price");
