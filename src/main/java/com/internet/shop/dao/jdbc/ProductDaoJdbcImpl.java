@@ -92,7 +92,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
     @Override
     public boolean delete(Long id) {
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "UPDATE products SET deleted = 1 WHERE product_id = ?;";
+            String query = "UPDATE products SET deleted = TRUE WHERE product_id = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setBigDecimal(1, BigDecimal.valueOf(id));
             statement.executeUpdate();
