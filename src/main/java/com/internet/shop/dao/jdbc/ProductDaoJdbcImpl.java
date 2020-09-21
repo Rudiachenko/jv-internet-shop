@@ -95,7 +95,6 @@ public class ProductDaoJdbcImpl implements ProductDao {
             String query = "UPDATE products SET deleted = TRUE WHERE product_id = ?;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setBigDecimal(1, BigDecimal.valueOf(id));
-            statement.executeUpdate();
             return statement.executeUpdate() == 1;
         } catch (SQLException e) {
             throw new DataProcessingException("Delete of product with id "
