@@ -8,6 +8,14 @@ public class Order {
     private Long userId;
     private List<Product> products;
 
+    public Order() {
+    }
+
+    public Order(Long id, Long userId) {
+        this.id = id;
+        this.userId = userId;
+    }
+
     public Order(Long userId) {
         products = new ArrayList<>();
         this.userId = userId;
