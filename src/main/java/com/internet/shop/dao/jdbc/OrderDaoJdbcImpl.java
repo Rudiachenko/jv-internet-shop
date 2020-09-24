@@ -89,8 +89,8 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 orders.add(order);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Get order with id "
-                    + " is failed", e);
+            throw new DataProcessingException("Get order of user with id "
+                    + userId + " is failed", e);
         }
         for (Order order : orders) {
             order.setProducts(extractProductsForOrder(order.getId()));
@@ -129,7 +129,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't get order with id "
+            throw new DataProcessingException("Can't insert order with id "
                     + order.getId() + " is failed", e);
         }
     }

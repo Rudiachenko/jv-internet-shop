@@ -69,7 +69,7 @@ public class ShoppingCartJdbcImpl implements ShoppingCartDao {
                 shoppingCart = createShoppingCartFromResultSet(resultSet);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Get shopping cart of user id "
+            throw new DataProcessingException("Get shopping cart of user with id "
                     + userId + " is failed", e);
         }
         shoppingCart.setProducts(extractProductsForShoppingCart(shoppingCart.getUserId()));

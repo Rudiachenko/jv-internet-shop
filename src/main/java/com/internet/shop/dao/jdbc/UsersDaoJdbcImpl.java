@@ -118,7 +118,7 @@ public class UsersDaoJdbcImpl implements UserDao {
             statement.setLong(1, id);
             return statement.executeUpdate() == 1;
         } catch (SQLException e) {
-            throw new DataProcessingException("DELETE of user with id "
+            throw new DataProcessingException("Delete of user with id "
                     + id + " is failed", e);
         }
     }
@@ -147,7 +147,8 @@ public class UsersDaoJdbcImpl implements UserDao {
                 roles.add(role);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("", e);
+            throw new DataProcessingException("It's impossible to set role "
+                    + "for user with id " + user.getId(), e);
         }
         user.setRoles(roles);
         return user;
@@ -165,7 +166,7 @@ public class UsersDaoJdbcImpl implements UserDao {
                 statement.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Insert role of user id "
+            throw new DataProcessingException("Insert role of user with id "
                     + user.getId() + " is failed ", e);
         }
         return user;
