@@ -39,28 +39,28 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public Optional<Order> getById(Long id) {
-        Order order = new Order();
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "SELECT * FROM orders WHERE order_id = ?";
+            String query = "SELECT * FROM orders WHERE order_id = ? AND deleted = FALSE";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                order = createOrderFromResultSet(resultSet);
+            if (resultSet.next()) {
+                Order order = createOrderFromResultSet(resultSet);
+                order.setProducts(extractProductsForOrder(order.getId()));
+                return Optional.of(order);
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Get order with id "
                     + id + " is failed", e);
         }
-        order.setProducts(extractProductsForOrder(order.getId()));
-        return Optional.of(order);
+        return Optional.empty();
     }
 
     @Override
     public List<Order> getAll() {
         List<Order> orders = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "SELECT * FROM orders";
+            String query = "SELECT * FROM orders WHERE deleted = FALSE";
             PreparedStatement statement = connection.prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -68,7 +68,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                 orders.add(order);
             }
         } catch (SQLException e) {
-            throw new DataProcessingException("Get orders failed", e);
+            throw new DataProcessingException("Can't get all orders", e);
         }
         for (Order order : orders) {
             order.setProducts(extractProductsForOrder(order.getId()));
@@ -80,7 +80,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
     public List<Order> getUserOrders(Long userId) {
         List<Order> orders = new ArrayList<>();
         try (Connection connection = ConnectionUtil.getConnection()) {
-            String query = "SELECT * FROM orders WHERE user_id = ?";
+            String query = "SELECT * FROM orders WHERE user_id = ? AND deleted = FALSE";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, userId);
             ResultSet resultSet = statement.executeQuery();
@@ -111,7 +111,6 @@ public class OrderDaoJdbcImpl implements OrderDao {
             String query = "UPDATE orders SET deleted = TRUE WHERE order_id = ?";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
-            deleteProductsFromOrder(id);
             return statement.executeUpdate() == 1;
         } catch (SQLException e) {
             throw new DataProcessingException("Delete of order with id "
@@ -130,7 +129,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Can't insert order with id "
-                    + order.getId() + " is failed", e);
+                    + order.getId(), e);
         }
     }
 
@@ -138,7 +137,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM products "
                     + "INNER JOIN orders_products as op on products.product_id = op.product_id "
-                    + "WHERE order_id = ?;";
+                    + "WHERE order_id = ? AND deleted = FALSE;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();

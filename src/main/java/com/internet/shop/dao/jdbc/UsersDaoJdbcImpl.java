@@ -36,43 +36,44 @@ public class UsersDaoJdbcImpl implements UserDao {
             throw new DataProcessingException("It is impossible to create a user: "
                     + user, e);
         }
-        return insertRoleToUsersRolesTable(user);
+        insertRoleToUsersRolesTable(user);
+        return setRoleToUser(user);
     }
 
     @Override
     public Optional<User> getById(Long id) {
-        User user = new User();
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users WHERE user_id = ? AND deleted = FALSE;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                user = createUserFromResultSet(resultSet);
+            if (resultSet.next()) {
+                User user = createUserFromResultSet(resultSet);
+                return Optional.of(user);
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Get user with id "
                     + id + " is failed", e);
         }
-        return Optional.of(user);
+        return Optional.empty();
     }
 
     @Override
     public Optional<User> findByLogin(String login) {
-        User user = new User();
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users WHERE login = ? AND deleted = FALSE;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                user = createUserFromResultSet(resultSet);
+            if (resultSet.next()) {
+                User user = createUserFromResultSet(resultSet);
+                return Optional.of(user);
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Get user with login "
                     + login + " is failed", e);
         }
-        return Optional.of(user);
+        return Optional.empty();
     }
 
     @Override
@@ -107,7 +108,8 @@ public class UsersDaoJdbcImpl implements UserDao {
                     + user.getId() + " is failed", e);
         }
         deleteUserRoles(user);
-        return insertRoleToUsersRolesTable(user);
+        insertRoleToUsersRolesTable(user);
+        return setRoleToUser(user);
     }
 
     @Override
