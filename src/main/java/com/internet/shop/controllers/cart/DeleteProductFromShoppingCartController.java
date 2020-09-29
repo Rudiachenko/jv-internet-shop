@@ -21,10 +21,10 @@ public class DeleteProductFromShoppingCartController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws IOException {
-        Long id = Long.parseLong(req.getParameter("id"));
+        Long productId = Long.parseLong(req.getParameter("id"));
         Long userId = (Long) req.getSession().getAttribute(USER_ID);
         ShoppingCart cart = shoppingCartService.getByUserId(userId);
-        Product product = productService.get(id);
+        Product product = productService.get(productId);
         shoppingCartService.deleteProduct(cart, product);
         resp.sendRedirect(req.getContextPath() + "/shopping-carts/products");
     }
