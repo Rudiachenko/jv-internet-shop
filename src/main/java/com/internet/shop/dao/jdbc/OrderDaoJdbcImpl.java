@@ -39,21 +39,21 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public Optional<Order> getById(Long id) {
+        Order order = new Order();
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM orders WHERE order_id = ? AND deleted = FALSE";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                Order order = createOrderFromResultSet(resultSet);
-                order.setProducts(extractProductsForOrder(order.getId()));
-                return Optional.of(order);
+                order = createOrderFromResultSet(resultSet);
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Get order with id "
                     + id + " is failed", e);
         }
-        return Optional.empty();
+        order.setProducts(extractProductsForOrder(order.getId()));
+        return Optional.of(order);
     }
 
     @Override

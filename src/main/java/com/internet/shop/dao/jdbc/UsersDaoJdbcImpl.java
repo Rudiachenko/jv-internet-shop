@@ -42,38 +42,39 @@ public class UsersDaoJdbcImpl implements UserDao {
 
     @Override
     public Optional<User> getById(Long id) {
+        User user = new User();
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users WHERE user_id = ? AND deleted = FALSE;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                User user = createUserFromResultSet(resultSet);
-                return Optional.of(user);
+                user = createUserFromResultSet(resultSet);
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Get user with id "
                     + id + " is failed", e);
         }
-        return Optional.empty();
+        return Optional.of(setRoleToUser(user));
     }
 
     @Override
     public Optional<User> findByLogin(String login) {
+        User user = new User();
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users WHERE login = ? AND deleted = FALSE;";
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, login);
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
-                User user = createUserFromResultSet(resultSet);
+                user = createUserFromResultSet(resultSet);
                 return Optional.of(user);
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Get user with login "
                     + login + " is failed", e);
         }
-        return Optional.empty();
+        return Optional.of(setRoleToUser(user));
     }
 
     @Override
@@ -89,6 +90,9 @@ public class UsersDaoJdbcImpl implements UserDao {
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Get users is failed", e);
+        }
+        for (User user : userList){
+            setRoleToUser(user);
         }
         return userList;
     }
@@ -129,8 +133,7 @@ public class UsersDaoJdbcImpl implements UserDao {
         long userId = resultSet.getLong("user_id");
         String login = resultSet.getString("login");
         String password = resultSet.getString("password");
-        User user = new User(userId, login, password);
-        return setRoleToUser(user);
+        return new User(userId, login, password);
     }
 
     private User setRoleToUser(User user) {
