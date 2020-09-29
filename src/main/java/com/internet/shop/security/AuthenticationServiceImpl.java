@@ -1,7 +1,5 @@
 package com.internet.shop.security;
 
-import static com.internet.shop.util.HashUtil.getSalt;
-
 import com.internet.shop.exceptions.AuthenticationException;
 import com.internet.shop.lib.Inject;
 import com.internet.shop.lib.Service;
