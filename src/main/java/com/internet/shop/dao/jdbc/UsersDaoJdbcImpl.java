@@ -42,7 +42,7 @@ public class UsersDaoJdbcImpl implements UserDao {
 
     @Override
     public Optional<User> getById(Long id) {
-        User user = new User();
+        User user;
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users WHERE user_id = ? AND deleted = FALSE;";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -50,6 +50,8 @@ public class UsersDaoJdbcImpl implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 user = createUserFromResultSet(resultSet);
+            } else {
+                return Optional.empty();
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Get user with id "
@@ -60,7 +62,7 @@ public class UsersDaoJdbcImpl implements UserDao {
 
     @Override
     public Optional<User> findByLogin(String login) {
-        User user = new User();
+        User user;
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM users WHERE login = ? AND deleted = FALSE;";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -68,7 +70,8 @@ public class UsersDaoJdbcImpl implements UserDao {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 user = createUserFromResultSet(resultSet);
-                return Optional.of(user);
+            } else {
+                return Optional.empty();
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Get user with login "
@@ -91,7 +94,7 @@ public class UsersDaoJdbcImpl implements UserDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Get users is failed", e);
         }
-        for (User user : userList){
+        for (User user : userList) {
             setRoleToUser(user);
         }
         return userList;

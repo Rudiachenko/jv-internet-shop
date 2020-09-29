@@ -39,7 +39,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public Optional<Order> getById(Long id) {
-        Order order = new Order();
+        Order order;
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM orders WHERE order_id = ? AND deleted = FALSE";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -47,6 +47,8 @@ public class OrderDaoJdbcImpl implements OrderDao {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 order = createOrderFromResultSet(resultSet);
+            } else {
+                return Optional.empty();
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Get order with id "

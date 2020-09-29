@@ -40,7 +40,7 @@ public class ShoppingCartJdbcImpl implements ShoppingCartDao {
 
     @Override
     public Optional<ShoppingCart> getById(Long id) {
-        ShoppingCart shoppingCart = new ShoppingCart();
+        ShoppingCart shoppingCart;
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM shopping_carts WHERE cart_id = ? AND deleted = FALSE";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -48,6 +48,8 @@ public class ShoppingCartJdbcImpl implements ShoppingCartDao {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 shoppingCart = createShoppingCartFromResultSet(resultSet);
+            } else {
+                return Optional.empty();
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Get shopping cart with id "
@@ -59,7 +61,7 @@ public class ShoppingCartJdbcImpl implements ShoppingCartDao {
 
     @Override
     public Optional<ShoppingCart> getByUserId(Long userId) {
-        ShoppingCart shoppingCart = new ShoppingCart();
+        ShoppingCart shoppingCart;
         try (Connection connection = ConnectionUtil.getConnection()) {
             String query = "SELECT * FROM shopping_carts WHERE user_id = ? AND deleted = FALSE";
             PreparedStatement statement = connection.prepareStatement(query);
@@ -67,6 +69,8 @@ public class ShoppingCartJdbcImpl implements ShoppingCartDao {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 shoppingCart = createShoppingCartFromResultSet(resultSet);
+            } else {
+                return Optional.empty();
             }
         } catch (SQLException e) {
             throw new DataProcessingException("Get shopping cart of user with id "
