@@ -14,6 +14,7 @@ CREATE TABLE internet_shop.`users`
     `user_id`  BIGINT(11)   NOT NULL AUTO_INCREMENT,
     `login`    VARCHAR(256) NOT NULL,
     `password` VARCHAR(256) NOT NULL,
+    `salt`     VARBINARY(16) NOT NULL,
     `deleted`  TINYINT      NULL DEFAULT 0,
     PRIMARY KEY (`user_id`)
 );
