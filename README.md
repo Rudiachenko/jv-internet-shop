@@ -31,7 +31,7 @@ The project is built on the basis of n-tier architecture and consists of the fol
 + MySQL
 + OOP, SOLID, RBAC principles.  
 
-To run a project on your local machine:
+### ***To run a project on your local machine:***
 + Clone this repository first.
 + Make sure you have Tomcat and MySQL configured.
 + Set up connection in src/main/java/com/internet/shop/util/ConnectionUtil.java (link to your schema, user, password)
