@@ -28,7 +28,7 @@ The project is built on the basis of n-tier architecture and consists of the fol
 + Tomcat
 + Servlets
 + JSP
-+ MqSQL
++ MySQL
 + OOP, SOLID, RBAC principles.  
 
 To run a project on your local machine:
